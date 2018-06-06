@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": " ",
   "productName": "bopr",
-  "cordovaId": "org.cordova.quasar.app",
-  "author": "Marlo Ploemen <marlo.ploemen@gmail.com>",
+  "author": "M. Ploemen",
   "private": true,
   "scripts": {
     "lint": "eslint --ext .js,.vue src",
