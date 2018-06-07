@@ -1,4 +1,6 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, Menu, MenuItem } from 'electron'
+import { autoUpdater } from 'electron-updater'
+const logger = require('electron-log')
 
 /**
  * Set `__statics` path to static files in production;
@@ -25,9 +27,30 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  console.log('autoUpdater checking for updates...')
+  autoUpdater.checkForUpdatesAndNotify()
+  autoUpdater.logger = logger
+  autoUpdater.logger['transports'].file.level = 'debug'
 }
 
-app.on('ready', createWindow)
+function createMenu () {
+  const menu = new Menu()
+
+  menu.append(new MenuItem({
+    label: 'Console',
+    click: () => {
+      mainWindow.webContents.toggleDevTools()
+    }
+  }))
+
+  Menu.setApplicationMenu(menu)
+}
+
+app.on('ready', () => {
+  createWindow()
+  createMenu()
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
