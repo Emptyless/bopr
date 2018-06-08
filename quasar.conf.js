@@ -45,7 +45,10 @@ module.exports = function (ctx) {
           allowToChangeInstallationDirectory: true
         },
         win: {
-          publish: ['github']
+          publish: {
+            provider: 'github',
+            publishAutoUpdate: true
+          }
         }
       }
     }
